@@ -9,22 +9,39 @@ namespace Terminal
 {
     class SerialPortCommunication
     {
-        private SerialPort serialPort { get; set; }
+        private SerialPort serialPort = new SerialPort();
         private String receivedString { get; set; }
 
-        SerialPortCommunication(String portName, int baudRate, int dataBits, Handshake handshake, Parity parity, StopBits stopBits)
+
+        public void setSerialPortParameters(String portName, int baudRate, int dataBits, Handshake handshake, Parity parity, StopBits stopBits)
         {
-            serialPort = new SerialPort();
-            serialPort.PortName = portName;
-            serialPort.BaudRate = baudRate;
-            serialPort.DataBits = dataBits;
-            serialPort.Handshake = handshake;
-            serialPort.Parity = parity;
-            serialPort.StopBits = stopBits;
-            serialPort.DataReceived += new SerialDataReceivedEventHandler(serialPortReceivedData);
+            try
+            {
+                serialPort.PortName = portName;
+                serialPort.BaudRate = baudRate;
+                serialPort.DataBits = dataBits;
+                serialPort.Handshake = handshake;
+                serialPort.Parity = parity;
+                serialPort.StopBits = stopBits;
+                serialPort.DataReceived += new SerialDataReceivedEventHandler(serialPortReceivedData);
+            } catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
 
         }
-
+        public void Open()
+        {
+            serialPort.Open();
+        }
+        public void Close()
+        {
+            serialPort.Close();
+        }
+        public void Send(byte[] buffer)
+        {
+            serialPort.Write(buffer, 0, buffer.Length);
+        }
         void serialPortReceivedData(object sender, SerialDataReceivedEventArgs eventArgs)
         {
             byte[] buffer = new byte[serialPort.ReadBufferSize];
