@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Terminal
 {
     class SerialPortCommunication
     {
         private SerialPort serialPort = new SerialPort();
-        private String receivedString { get; set; }
+        private string ReceivedString { get; set; }
 
+        private const int EOT = 0x4;
 
-        public void setSerialPortParameters(String portName, int baudRate, int dataBits, Handshake handshake, Parity parity, StopBits stopBits)
+        public void SetSerialPortParameters(string portName, int baudRate, int dataBits, Handshake handshake, Parity parity, StopBits stopBits)
         {
             try
             {
@@ -23,37 +21,60 @@ namespace Terminal
                 serialPort.Handshake = handshake;
                 serialPort.Parity = parity;
                 serialPort.StopBits = stopBits;
-                serialPort.DataReceived += new SerialDataReceivedEventHandler(serialPortReceivedData);
+                serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPortReceivedData);
             } catch (Exception e)
             {
                 Console.WriteLine(e);
             }
+        }
 
-        }
-        public void Open()
+        public bool Open()
         {
-            serialPort.Open();
+            try {
+                serialPort.Open();
+            } catch(Exception e) {
+                Console.WriteLine(e);
+                return false;
+            }
+
+            return true;
         }
-        public void Close()
+
+        public bool Close()
         {
-            serialPort.Close();
+            try
+            {
+                serialPort.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+
+            return true;
         }
+
         public void Send(byte[] buffer)
         {
             serialPort.Write(buffer, 0, buffer.Length);
         }
-        void serialPortReceivedData(object sender, SerialDataReceivedEventArgs eventArgs)
+
+        public void SerialPortReceivedData(object sender, SerialDataReceivedEventArgs eventArgs)
         {
             byte[] buffer = new byte[serialPort.ReadBufferSize];
 
             int bytesRead = serialPort.Read(buffer, 0, buffer.Length);
 
-            receivedString += Encoding.ASCII.GetString(buffer, 0, bytesRead);
+            ReceivedString += Encoding.ASCII.GetString(buffer, 0, bytesRead);
   
-            if (receivedString.IndexOf((char)0x4) > -1)
+            // Jeśli znaleziony znak End-Of-Transmission
+            if (ReceivedString.IndexOf((char)EOT) > -1)
             {
-                string workingString = receivedString.Substring(0, receivedString.IndexOf((char)0x4));
-                receivedString = receivedString.Substring(receivedString.IndexOf((char)0x4));
+                // Istotne dane
+                string workingString = ReceivedString.Substring(0, ReceivedString.IndexOf((char)EOT));
+
+                ReceivedString = ReceivedString.Substring(ReceivedString.IndexOf((char)EOT));
                 Console.WriteLine(workingString);
             }
         }
