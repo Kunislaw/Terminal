@@ -5,63 +5,101 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Terminal"
         mc:Ignorable="d"
-        Title="Terminal Sulecki i Weyna 1.0" Height="800" Width="1200">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Label  Width="Auto" Height="Auto" FontSize="16" Margin="0,0,1011,727">Wybierz port COM:</Label>
-        <ComboBox Margin="24,36,1011,696" ItemsSource="{Binding cbItems}" SelectedIndex="0">
-        </ComboBox>
-        <Label Margin="199,0,836,727" FontSize="16">Wybierz prędkość:</Label>
-        <ComboBox Margin="199,36,847,696" SelectedIndex="0">
-            <ComboBoxItem Content="600"/>
-            <ComboBoxItem Content="1200"/>
-            <ComboBoxItem Content="2400"/>
-            <ComboBoxItem Content="4800"/>
-            <ComboBoxItem Content="9600"/>
-            <ComboBoxItem Content="14400"/>
-            <ComboBoxItem Content="19200"/>
-            <ComboBoxItem Content="28800"/>
-            <ComboBoxItem Content="38400"/>
-            <ComboBoxItem Content="56000"/>
-            <ComboBoxItem Content="57600"/>
-            <ComboBoxItem Content="115200"/>
-            <ComboBoxItem Content="128000"/>
-            <ComboBoxItem Content="256000"/>
-        </ComboBox>
-        <Label Margin="367,0,728,727" FontSize="16" Content="Ilość bitów:"/>
-        <ComboBox Margin="367,36,728,696" SelectedIndex="0">
-            <ComboBoxItem Content="5"/>
-            <ComboBoxItem Content="6"/>
-            <ComboBoxItem Content="7"/>
-            <ComboBoxItem Content="8"/>
-        </ComboBox>
-        <Label Margin="484,0,611,727" FontSize="16" Content="Parzystość:"/>
-        <ComboBox Margin="484,36,611,696" SelectedIndex="0">
-            <ComboBoxItem Content="none"/>
-            <ComboBoxItem Content="odd"/>
-            <ComboBoxItem Content="even"/>
-            <ComboBoxItem Content="mark"/>
-            <ComboBoxItem Content="space"/>
-        </ComboBox>
-        <Label Margin="600,0,466,727" FontSize="16" Content="Ilość bitu stopu:" RenderTransformOrigin="-0.326,0.686"/>
-        <ComboBox Margin="600,36,466,696" SelectedIndex="0">
-            <ComboBoxItem Content="1"/>
-            <ComboBoxItem Content="1.5"/>
-            <ComboBoxItem Content="2"/>
-        </ComboBox>
-        <Label Margin="748,0,318,727" FontSize="16" Content="Handshaking:"/>
-        <ComboBox Margin="748,36,318,696" SelectedIndex="0">
-            <ComboBoxItem Content="none"/>
-            <ComboBoxItem Content="RTS/CTS"/>
-            <ComboBoxItem Content="XON/XOFF"/>
-            <ComboBoxItem Content="RTS/CTS+XON/XOFF"/>
+        Title="Terminal Sulecki i Weyna 1.0" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
+
+    <Border Padding="10">
+        <StackPanel>
+                
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="0 0 10 0" Grid.Column="0">
+                    <TextBlock Text="COM:" />
+                    <ComboBox x:Name="COMComboBox" Padding="2" SelectedIndex="0" ItemsSource="{Binding CbItems}" />
+                </StackPanel>
+
+                <StackPanel Margin="0 0 10 0" Grid.Column="1">
+                    <TextBlock Text="Szybkość transmisji:" />
+                    <ComboBox x:Name="BaudrateComboBox" Padding="2" SelectedIndex="0">
+                        <ComboBoxItem Content="600"/>
+                        <ComboBoxItem Content="1200"/>
+                        <ComboBoxItem Content="2400"/>
+                        <ComboBoxItem Content="4800"/>
+                        <ComboBoxItem Content="9600"/>
+                        <ComboBoxItem Content="14400"/>
+                        <ComboBoxItem Content="19200"/>
+                        <ComboBoxItem Content="28800"/>
+                        <ComboBoxItem Content="38400"/>
+                        <ComboBoxItem Content="56000"/>
+                        <ComboBoxItem Content="57600"/>
+                        <ComboBoxItem Content="115200"/>
+                        <ComboBoxItem Content="128000"/>
+                        <ComboBoxItem Content="256000"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="0 0 10 0" Grid.Column="2">
+                    <TextBlock Text="Ilość bitów:" />
+                    <ComboBox x:Name="BitsComboBox" Padding="2" SelectedIndex="0">
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                        <ComboBoxItem Content="7"/>
+                        <ComboBoxItem Content="8"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="0 0 10 0" Grid.Column="3">
+                    <TextBlock Text="Parzystość:" />
+                    <ComboBox x:Name="ParityComboBox" Padding="2" SelectedIndex="0">
+                        <ComboBoxItem Content="None"/>
+                        <ComboBoxItem Content="Odd"/>
+                        <ComboBoxItem Content="Even"/>
+                        <ComboBoxItem Content="Mark"/>
+                        <ComboBoxItem Content="Space"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="0 0 10 0" Grid.Column="4">
+                    <TextBlock Text="Ilość bitu stopu:" />
+                    <ComboBox x:Name="StopBitsComboBox" Padding="2" SelectedIndex="0">
+                        <ComboBoxItem Content="None"/>
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="1.5"/>
+                        <ComboBoxItem Content="2"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="0 0 10 0" Grid.Column="5">
+                    <TextBlock Text="Handshaking:" />
+                    <ComboBox x:Name="HandshakeComboBox" Padding="2" SelectedIndex="0">
+                        <ComboBoxItem Content="None"/>
+                        <ComboBoxItem Content="RTS/CTS"/>
+                        <ComboBoxItem Content="XON/XOFF"/>
+                        <ComboBoxItem Content="RTS/CTS+XON/XOFF"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="0 0 10 0" Grid.Column="6">
+                    <Button x:Name="OpenButton" Click="OpenButton_Click" Margin="0 0 0 5" Content="Otwórz" />
+                    <Button x:Name="CloseButton" Click="CloseButton_Click" Content="Zamknij" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="7">
+                    <TextBlock Margin="0 0 0 5" Text="Status portu:" />
+                    <TextBlock x:Name="ClosedText" Foreground="Red" Text="Zamknięty" />
+                </StackPanel>
+            </Grid>
             
-        </ComboBox>
-        <Label Margin="1052,0,10,727" FontSize="16" Content="Status portu:"/>
-        <Button Margin="907,3,168,735" Content="Otwórz"/>
-        <Button Margin="907,42,168,696" Content="Zamknij"/>
-        <Label Margin="1052,42,10,682" FontSize="16" Content="Zamknięty"/>
-    </Grid>
+        </StackPanel>
+    </Border>
+ 
 </Window>
