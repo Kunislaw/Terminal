@@ -9,9 +9,10 @@
 
     <Border Padding="10">
         <StackPanel>
-                
+
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -30,73 +31,118 @@
                 <StackPanel Margin="0 0 10 0" Grid.Column="1">
                     <TextBlock Text="Szybkość transmisji:" />
                     <ComboBox x:Name="BaudrateComboBox" Padding="2" SelectedIndex="0">
-                        <ComboBoxItem Content="600"/>
-                        <ComboBoxItem Content="1200"/>
-                        <ComboBoxItem Content="2400"/>
-                        <ComboBoxItem Content="4800"/>
-                        <ComboBoxItem Content="9600"/>
-                        <ComboBoxItem Content="14400"/>
-                        <ComboBoxItem Content="19200"/>
-                        <ComboBoxItem Content="28800"/>
-                        <ComboBoxItem Content="38400"/>
-                        <ComboBoxItem Content="56000"/>
-                        <ComboBoxItem Content="57600"/>
-                        <ComboBoxItem Content="115200"/>
-                        <ComboBoxItem Content="128000"/>
-                        <ComboBoxItem Content="256000"/>
+                        <ComboBoxItem Content="600" />
+                        <ComboBoxItem Content="1200" />
+                        <ComboBoxItem Content="2400" />
+                        <ComboBoxItem Content="4800" />
+                        <ComboBoxItem Content="9600" />
+                        <ComboBoxItem Content="14400" />
+                        <ComboBoxItem Content="19200" />
+                        <ComboBoxItem Content="28800" />
+                        <ComboBoxItem Content="38400" />
+                        <ComboBoxItem Content="56000" />
+                        <ComboBoxItem Content="57600" />
+                        <ComboBoxItem Content="115200" />
+                        <ComboBoxItem Content="128000" />
+                        <ComboBoxItem Content="256000" />
                     </ComboBox>
                 </StackPanel>
 
                 <StackPanel Margin="0 0 10 0" Grid.Column="2">
                     <TextBlock Text="Ilość bitów:" />
                     <ComboBox x:Name="BitsComboBox" Padding="2" SelectedIndex="0">
-                        <ComboBoxItem Content="5"/>
-                        <ComboBoxItem Content="6"/>
-                        <ComboBoxItem Content="7"/>
-                        <ComboBoxItem Content="8"/>
+                        <ComboBoxItem Content="5" />
+                        <ComboBoxItem Content="6" />
+                        <ComboBoxItem Content="7" />
+                        <ComboBoxItem Content="8" />
                     </ComboBox>
                 </StackPanel>
 
                 <StackPanel Margin="0 0 10 0" Grid.Column="3">
                     <TextBlock Text="Parzystość:" />
                     <ComboBox x:Name="ParityComboBox" Padding="2" SelectedIndex="0">
-                        <ComboBoxItem Content="None"/>
-                        <ComboBoxItem Content="Odd"/>
-                        <ComboBoxItem Content="Even"/>
-                        <ComboBoxItem Content="Mark"/>
-                        <ComboBoxItem Content="Space"/>
+                        <ComboBoxItem Content="None" />
+                        <ComboBoxItem Content="Odd" />
+                        <ComboBoxItem Content="Even" />
+                        <ComboBoxItem Content="Mark" />
+                        <ComboBoxItem Content="Space" />
                     </ComboBox>
                 </StackPanel>
 
                 <StackPanel Margin="0 0 10 0" Grid.Column="4">
                     <TextBlock Text="Ilość bitu stopu:" />
                     <ComboBox x:Name="StopBitsComboBox" Padding="2" SelectedIndex="0">
-                        <ComboBoxItem Content="None"/>
-                        <ComboBoxItem Content="1"/>
-                        <ComboBoxItem Content="1.5"/>
-                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="None" />
+                        <ComboBoxItem Content="1" />
+                        <ComboBoxItem Content="1.5" />
+                        <ComboBoxItem Content="2" />
                     </ComboBox>
                 </StackPanel>
 
                 <StackPanel Margin="0 0 10 0" Grid.Column="5">
                     <TextBlock Text="Handshaking:" />
                     <ComboBox x:Name="HandshakeComboBox" Padding="2" SelectedIndex="0">
-                        <ComboBoxItem Content="None"/>
-                        <ComboBoxItem Content="RTS/CTS"/>
-                        <ComboBoxItem Content="XON/XOFF"/>
-                        <ComboBoxItem Content="RTS/CTS+XON/XOFF"/>
+                        <ComboBoxItem Content="None" />
+                        <ComboBoxItem Content="RTS/CTS" />
+                        <ComboBoxItem Content="XON/XOFF" />
+                        <ComboBoxItem Content="RTS/CTS+XON/XOFF" />
                     </ComboBox>
                 </StackPanel>
 
-                <StackPanel Margin="0 0 10 0" Grid.Column="6">
+                <StackPanel Margin="0 0 10 0" Grid.Column="6" >
                     <Button x:Name="OpenButton" Click="OpenButton_Click" Margin="0 0 0 5" Content="Otwórz" />
                     <Button x:Name="CloseButton" Click="CloseButton_Click" Content="Zamknij" />
                 </StackPanel>
 
-                <StackPanel Grid.Column="7">
+                <StackPanel Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Margin="0 0 0 5" Text="Status portu:" />
-                    <TextBlock x:Name="ClosedText" Foreground="Red" Text="Zamknięty" />
+                    <TextBlock x:Name="ClosedText" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Zamknięty" />
                 </StackPanel>
+
+                <StackPanel Grid.Column="8">
+                    <TextBlock Margin="0 0 0 5" Text="Czyść okno:" />
+                    <Button Content="Czyść" />
+                </StackPanel>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="0 5 5 5" Grid.Column="0">
+                    <ListBox Height="500">
+                        <ListBoxItem>Ramka #1</ListBoxItem>
+                        <ListBoxItem>Ramka #2</ListBoxItem>
+                        <ListBoxItem>Ramka #3</ListBoxItem>
+                    </ListBox>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Button Grid.Column="0" Margin="0 5 5 0" Content="Dodaj" />
+                        <Button Grid.Column="1" Margin="0 5 5 0" Content="Kopiuj" />
+                        <Button Grid.Column="2" Margin="0 5 0 0" Content="Usuń" />
+                    </Grid>
+                    
+                </StackPanel>
+
+                <TextBox Grid.Column="1" Margin="0 5" TextWrapping="Wrap" IsEnabled="False" Text="[2019-11-01 T 11:20]: Hello World!"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox Margin="0 0 5 0" Grid.Column="0"/>
+                <Button Grid.Column="1" Content="Wyślij"/>
             </Grid>
             
         </StackPanel>
