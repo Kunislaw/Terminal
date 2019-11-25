@@ -103,7 +103,8 @@ namespace Terminal
         }
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            RTBConsole.Document.Blocks.Clear();
+            //RTBConsole.Document.Blocks.Clear();
+            appendTextToConsole("AAAAAAAAAAA\n", Brushes.Red, true);
         }
         public void appendTextToConsole(String text, SolidColorBrush color, bool timestamp)
         {
@@ -116,6 +117,11 @@ namespace Terminal
             }
             range.Text += text;
             range.ApplyPropertyValue(TextElement.ForegroundProperty, color);
+        }
+
+        private void RTBConsole_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 
