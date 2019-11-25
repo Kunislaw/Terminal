@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:Terminal"
         mc:Ignorable="d"
         Title="Terminal Sulecki i Weyna 1.0" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
-
     <Border Padding="10">
         <StackPanel>
 

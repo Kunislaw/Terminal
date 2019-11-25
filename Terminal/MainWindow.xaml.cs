@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using Newtonsoft.Json;
 
 namespace Terminal
 {
@@ -13,9 +14,10 @@ namespace Terminal
     public partial class MainWindow : Window
     {
         private SerialPortCommunication serialPortCommunication;
+        private Config config = new Config();
         public ObservableCollection<ComboBoxItem> CbItems { get; set; }
         public ComboBoxItem SelectedCbItem { get; set; }
-  
+        
 
         public MainWindow()
         {
@@ -27,6 +29,7 @@ namespace Terminal
                 CbItems.Add(new ComboBoxItem { Content = item });
             }
             serialPortCommunication = new SerialPortCommunication(this);
+            config.readConfig();
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -72,7 +75,9 @@ namespace Terminal
                 SendButton.IsEnabled = true;
                 OpenButton.IsEnabled = false;
                 CloseButton.IsEnabled = true;
+                config.saveConfig();
             }
+
                 
         }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
