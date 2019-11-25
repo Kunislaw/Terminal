@@ -69,11 +69,9 @@ namespace Terminal
             {
                 ClosedText.Foreground = Brushes.Green;
                 ClosedText.Text = "Otwarty";
-            }
-            else
-            {
-                ClosedText.Foreground = Brushes.Red;
-                ClosedText.Text = "Zamknięty";
+                SendButton.IsEnabled = true;
+                OpenButton.IsEnabled = false;
+                CloseButton.IsEnabled = true;
             }
                 
         }
@@ -83,11 +81,9 @@ namespace Terminal
             {
                 ClosedText.Foreground = Brushes.Red;
                 ClosedText.Text = "Zamknięty";
-            }
-            else
-            {
-                ClosedText.Foreground = Brushes.Green;
-                ClosedText.Text = "Otwarty";
+                SendButton.IsEnabled = false;
+                OpenButton.IsEnabled = true;
+                CloseButton.IsEnabled = false;
             }
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
@@ -98,17 +94,22 @@ namespace Terminal
                 bufferToSend.Add((byte)c);
             }
             serialPortCommunication.Send(bufferToSend.ToArray());
+            appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true);
         }
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             RTBConsole.Document.Blocks.Clear();
         }
-        public void appendTextToConsole(String text, SolidColorBrush color)
+        public void appendTextToConsole(String text, SolidColorBrush color, bool timestamp)
         {
             TextRange range = new TextRange(
                     RTBConsole.Document.ContentEnd,
                     RTBConsole.Document.ContentEnd);
-            range.Text = text;
+            if (timestamp)
+            {
+                range.Text = "[" + DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "] ";
+            }
+            range.Text += text;
             range.ApplyPropertyValue(TextElement.ForegroundProperty, color);
         }
     }

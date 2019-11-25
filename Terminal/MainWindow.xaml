@@ -90,8 +90,8 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 0 10 0" Grid.Column="6" >
-                    <Button x:Name="OpenButton" Click="OpenButton_Click" Margin="0 0 0 5" Content="Otwórz" />
-                    <Button x:Name="CloseButton" Click="CloseButton_Click" Content="Zamknij" />
+                    <Button x:Name="OpenButton" Click="OpenButton_Click" Margin="0 0 0 5" Content="Otwórz" IsEnabled="True"/>
+                    <Button x:Name="CloseButton" Click="CloseButton_Click" Content="Zamknij" IsEnabled="False"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -148,7 +148,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox x:Name="SendTextBox" Margin="0 0 5 0" Grid.Column="0"/>
-                <Button x:Name="SendButton" Click="SendButton_Click" Grid.Column="1" Content="Wyślij"/>
+                <Button x:Name="SendButton" Click="SendButton_Click" Grid.Column="1" Content="Wyślij" IsEnabled="False"/>
             </Grid>
             
         </StackPanel>

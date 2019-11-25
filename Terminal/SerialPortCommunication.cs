@@ -9,12 +9,18 @@ namespace Terminal
     {
         private SerialPort serialPort = new SerialPort();
         private string ReceivedString { get; set; }
+        private Time time = new Time();
         private MainWindow mainWindow;
+        private long[] messageMilis = new long[2];
+        private bool whichTime;
 
 
         public SerialPortCommunication(MainWindow mW)
         {
             mainWindow = mW;
+            messageMilis[0] = time.getMillitsFrom1970();
+            messageMilis[1] = time.getMillitsFrom1970() - 5;
+            whichTime = false;
         }
         public void SetSerialPortParameters(string portName, int baudRate, int dataBits, Handshake handshake, Parity parity, StopBits stopBits)
         {
@@ -68,14 +74,27 @@ namespace Terminal
 
         public void SerialPortReceivedData(object sender, SerialDataReceivedEventArgs eventArgs)
         {
+
             byte[] buffer = new byte[serialPort.ReadBufferSize];
 
             int bytesRead = serialPort.Read(buffer, 0, buffer.Length);
 
             ReceivedString = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
-            mainWindow.Dispatcher.Invoke(() => mainWindow.appendTextToConsole(ReceivedString, Brushes.Red));
 
+            if(Math.Abs(messageMilis[0] - messageMilis[1]) > 3)
+            {
+                mainWindow.Dispatcher.Invoke(() => mainWindow.appendTextToConsole(ReceivedString + "\n", Brushes.Red, true));
+
+            } else
+            {
+                mainWindow.Dispatcher.Invoke(() => mainWindow.appendTextToConsole(ReceivedString, Brushes.Red, true));
+
+            }
+
+            messageMilis[whichTime?1:0] = time.getMillitsFrom1970();
+
+            whichTime = !whichTime;
         }
     }
 }
