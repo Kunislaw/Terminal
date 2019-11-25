@@ -101,7 +101,7 @@
 
                 <StackPanel Grid.Column="8">
                     <TextBlock Margin="0 0 0 5" Text="Czyść okno:" />
-                    <Button Content="Czyść" />
+                    <Button x:Name="ClearButton" Click="ClearButton_Click" Content="Czyść" />
                 </StackPanel>
             </Grid>
 
@@ -124,15 +124,21 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <Button Grid.Column="0" Margin="0 5 5 0" Content="Dodaj" />
                         <Button Grid.Column="1" Margin="0 5 5 0" Content="Kopiuj" />
                         <Button Grid.Column="2" Margin="0 5 0 0" Content="Usuń" />
                     </Grid>
-                    
-                </StackPanel>
 
-                <TextBox Grid.Column="1" Margin="0 5" TextWrapping="Wrap" IsEnabled="False" Text="[2019-11-01 T 11:20]: Hello World!"/>
+                </StackPanel>
+                <RichTextBox x:Name="RTBConsole" Grid.Column="1" Margin="0 5" IsEnabled="False" VerticalScrollBarVisibility="Visible" Focusable="True" >
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                    </RichTextBox.Resources>
+                </RichTextBox>
+
             </Grid>
 
             <Grid>
@@ -141,8 +147,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBox Margin="0 0 5 0" Grid.Column="0"/>
-                <Button Grid.Column="1" Content="Wyślij"/>
+                <TextBox x:Name="SendTextBox" Margin="0 0 5 0" Grid.Column="0"/>
+                <Button x:Name="SendButton" Click="SendButton_Click" Grid.Column="1" Content="Wyślij"/>
             </Grid>
             
         </StackPanel>

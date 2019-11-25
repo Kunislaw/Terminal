@@ -1,21 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace Terminal
 {
-    /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
-    /// </summary>
-    
+
     public partial class MainWindow : Window
     {
-        private SerialPortCommunication serialPortCommunication = new SerialPortCommunication();
+        private SerialPortCommunication serialPortCommunication;
         public ObservableCollection<ComboBoxItem> CbItems { get; set; }
         public ComboBoxItem SelectedCbItem { get; set; }
+  
 
         public MainWindow()
         {
@@ -26,6 +26,7 @@ namespace Terminal
             {
                 CbItems.Add(new ComboBoxItem { Content = item });
             }
+            serialPortCommunication = new SerialPortCommunication(this);
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -33,11 +34,12 @@ namespace Terminal
             string portName = COMComboBox.Text;
             int baudRate = int.Parse(BaudrateComboBox.Text);
             int dataBits = int.Parse(BitsComboBox.Text);
+
+
             Handshake handshake = 0;
             Parity parity = Parity.None;
             StopBits stopBits = StopBits.None;
 
-            // To do
             if (HandshakeComboBox.Text == "None")
                 handshake = Handshake.None;
 
@@ -75,7 +77,6 @@ namespace Terminal
             }
                 
         }
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             if (serialPortCommunication.Close())
@@ -89,5 +90,27 @@ namespace Terminal
                 ClosedText.Text = "Otwarty";
             }
         }
+        private void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<byte> bufferToSend = new List<byte>();
+            foreach(char c in SendTextBox.Text)
+            {
+                bufferToSend.Add((byte)c);
+            }
+            serialPortCommunication.Send(bufferToSend.ToArray());
+        }
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            RTBConsole.Document.Blocks.Clear();
+        }
+        public void appendTextToConsole(String text, SolidColorBrush color)
+        {
+            TextRange range = new TextRange(
+                    RTBConsole.Document.ContentEnd,
+                    RTBConsole.Document.ContentEnd);
+            range.Text = text;
+            range.ApplyPropertyValue(TextElement.ForegroundProperty, color);
+        }
     }
+
 }

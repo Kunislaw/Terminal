@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO.Ports;
 using System.Text;
+using System.Windows.Media;
 
 namespace Terminal
 {
@@ -8,9 +9,13 @@ namespace Terminal
     {
         private SerialPort serialPort = new SerialPort();
         private string ReceivedString { get; set; }
+        private MainWindow mainWindow;
 
-        private const int EOT = 0x4;
 
+        public SerialPortCommunication(MainWindow mW)
+        {
+            mainWindow = mW;
+        }
         public void SetSerialPortParameters(string portName, int baudRate, int dataBits, Handshake handshake, Parity parity, StopBits stopBits)
         {
             try
@@ -60,23 +65,17 @@ namespace Terminal
             serialPort.Write(buffer, 0, buffer.Length);
         }
 
+
         public void SerialPortReceivedData(object sender, SerialDataReceivedEventArgs eventArgs)
         {
             byte[] buffer = new byte[serialPort.ReadBufferSize];
 
             int bytesRead = serialPort.Read(buffer, 0, buffer.Length);
 
-            ReceivedString += Encoding.ASCII.GetString(buffer, 0, bytesRead);
-  
-            // Jeśli znaleziony znak End-Of-Transmission
-            if (ReceivedString.IndexOf((char)EOT) > -1)
-            {
-                // Istotne dane
-                string workingString = ReceivedString.Substring(0, ReceivedString.IndexOf((char)EOT));
+            ReceivedString = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
-                ReceivedString = ReceivedString.Substring(ReceivedString.IndexOf((char)EOT));
-                Console.WriteLine(workingString);
-            }
+            mainWindow.Dispatcher.Invoke(() => mainWindow.appendTextToConsole(ReceivedString, Brushes.Red));
+
         }
     }
 }
