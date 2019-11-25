@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Config.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="SerialPortCommunication.cs" />
