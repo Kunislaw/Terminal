@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO.Ports;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Media;
 
 namespace Terminal
@@ -81,7 +82,7 @@ namespace Terminal
 
             ReceivedString = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
-
+            if(pattern.)
             if(Math.Abs(messageMilis[0] - messageMilis[1]) > 3)
             {
                 mainWindow.Dispatcher.Invoke(() => mainWindow.appendTextToConsole(ReceivedString + "\n", Brushes.Red, true));
