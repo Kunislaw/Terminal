@@ -75,6 +75,7 @@ namespace Terminal
                 SendButton.IsEnabled = true;
                 OpenButton.IsEnabled = false;
                 CloseButton.IsEnabled = true;
+                SendTextBox.IsEnabled = true;
                 config.saveConfig();
             }
 
@@ -89,6 +90,7 @@ namespace Terminal
                 SendButton.IsEnabled = false;
                 OpenButton.IsEnabled = true;
                 CloseButton.IsEnabled = false;
+                SendTextBox.IsEnabled = false;
             }
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
