@@ -124,7 +124,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="0" Margin="0 5 5 0" Content="Dodaj" />
+                        <Button x:Name="AddFrame" Click="AddFrame_Click" Grid.Column="0" Margin="0 5 5 0" Content="Dodaj" />
                         <Button Grid.Column="1" Margin="0 5 5 0" Content="Kopiuj" />
                         <Button Grid.Column="2" Margin="0 5 0 0" Content="Usuń" />
                     </Grid>
@@ -149,7 +149,8 @@
                     <ColumnDefinition Width="10*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="SendTextBox" Margin="0 0 5 0" Grid.Column="0"/>
+
+                <TextBox x:Name="SendTextBox" Margin="0 0 5 0" IsEnabled="False" Grid.Column="0"/>
                 <Button x:Name="SendButton" Click="SendButton_Click" Grid.Column="1" Content="Wyślij" IsEnabled="False"/>
             </Grid>
             

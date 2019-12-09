@@ -75,6 +75,7 @@ namespace Terminal
                 SendButton.IsEnabled = true;
                 OpenButton.IsEnabled = false;
                 CloseButton.IsEnabled = true;
+                SendTextBox.IsEnabled = true;
                 config.saveConfig();
             }
 
@@ -89,6 +90,7 @@ namespace Terminal
                 SendButton.IsEnabled = false;
                 OpenButton.IsEnabled = true;
                 CloseButton.IsEnabled = false;
+                SendTextBox.IsEnabled = false;
             }
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
@@ -112,7 +114,7 @@ namespace Terminal
                     RTBConsole.Document.ContentEnd);
             if (timestamp)
             {
-                range.Text = "[" + DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "] ";
+                range.Text = "[" + DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "]: ";
             }
             range.Text += text;
             range.ApplyPropertyValue(TextElement.ForegroundProperty, color);
@@ -121,6 +123,12 @@ namespace Terminal
         private void RTBConsole_TextChanged(object sender, TextChangedEventArgs e)
         {
             RTBConsole.ScrollToEnd();
+        }
+
+        private void AddFrame_Click(object sender, RoutedEventArgs e)
+        {
+            AddFrame addFrame = new AddFrame();
+            addFrame.Show();
         }
     }
 
