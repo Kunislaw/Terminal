@@ -131,7 +131,7 @@
 
                 </StackPanel>
 
-                <RichTextBox x:Name="RTBConsole" Grid.Column="1" Margin="0 5" IsEnabled="False" Focusable="True" TextChanged="RTBConsole_TextChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Height="525">
+                <RichTextBox x:Name="RTBConsole" Grid.Column="1" Margin="0 5" IsEnabled="True" Focusable="True" TextChanged="RTBConsole_TextChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Height="525">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0" />

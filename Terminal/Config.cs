@@ -39,7 +39,7 @@ namespace Terminal
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "TerminalConfig.json")))
             {
-                outputFile.Write(JsonConvert.SerializeObject(this));
+                outputFile.Write(JsonConvert.SerializeObject(this, Formatting.Indented));
             }
         }
         public void readConfig()
