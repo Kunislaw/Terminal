@@ -124,6 +124,12 @@ namespace Terminal
         {
             RTBConsole.ScrollToEnd();
         }
+
+        private void AddFrame_Click(object sender, RoutedEventArgs e)
+        {
+            AddFrame addFrame = new AddFrame();
+            addFrame.Show();
+        }
     }
 
 }
