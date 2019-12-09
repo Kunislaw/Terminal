@@ -114,7 +114,7 @@ namespace Terminal
                     RTBConsole.Document.ContentEnd);
             if (timestamp)
             {
-                range.Text = "[" + DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "] ";
+                range.Text = "[" + DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "]: ";
             }
             range.Text += text;
             range.ApplyPropertyValue(TextElement.ForegroundProperty, color);
