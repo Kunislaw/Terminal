@@ -124,7 +124,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="0" Margin="0 5 5 0" Content="Dodaj" />
+                        <Button x:Name="AddFrame" Click="AddFrame_Click" Grid.Column="0" Margin="0 5 5 0" Content="Dodaj" />
                         <Button Grid.Column="1" Margin="0 5 5 0" Content="Kopiuj" />
                         <Button Grid.Column="2" Margin="0 5 0 0" Content="Usuń" />
                     </Grid>
