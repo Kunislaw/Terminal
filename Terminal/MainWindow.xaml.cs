@@ -14,22 +14,42 @@ namespace Terminal
     public partial class MainWindow : Window
     {
         private SerialPortCommunication serialPortCommunication;
-        private Config config = new Config();
+        public Config config { get; set; }= new Config();
         public ObservableCollection<ComboBoxItem> CbItems { get; set; }
         public ComboBoxItem SelectedCbItem { get; set; }
         
-
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
             CbItems = new ObservableCollection<ComboBoxItem>();
+
             foreach(string item in SerialPort.GetPortNames())
             {
                 CbItems.Add(new ComboBoxItem { Content = item });
             }
+
             serialPortCommunication = new SerialPortCommunication(this);
+
             config.readConfig();
+
+            // Ramki
+            config.refreshFrameList(this);
+                
+            // Ustawienia polaczenia
+            COMComboBox.Text = config.lastCOM;
+            BaudrateComboBox.Text = config.lastSpeed.ToString();
+            BitsComboBox.Text = config.bitsNumber.ToString();
+            HandshakeComboBox.Text = config.handShaking.ToString();
+            ParityComboBox.Text = config.parity.ToString();
+         
+            if (config.stopsBits.ToString() == "One")
+                StopBitsComboBox.Text = "1";
+            if (config.stopsBits.ToString() == "OnePointFive")
+                StopBitsComboBox.Text = "1.5";
+            if (config.stopsBits.ToString() == "Two")
+                StopBitsComboBox.Text = "2";
+
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -37,8 +57,6 @@ namespace Terminal
             string portName = COMComboBox.Text;
             int baudRate = int.Parse(BaudrateComboBox.Text);
             int dataBits = int.Parse(BitsComboBox.Text);
-
-
             Handshake handshake = 0;
             Parity parity = Parity.None;
             StopBits stopBits = StopBits.None;
@@ -76,8 +94,10 @@ namespace Terminal
                 OpenButton.IsEnabled = false;
                 CloseButton.IsEnabled = true;
                 SendTextBox.IsEnabled = true;
+                config.setConfig(portName, baudRate, dataBits, parity, stopBits, handshake);
                 config.saveConfig();
-            }
+            } else
+                MessageBox.Show("The semaphore timeout period has expired.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 
         }
@@ -107,7 +127,7 @@ namespace Terminal
         {
             RTBConsole.Document.Blocks.Clear();
         }
-        public void appendTextToConsole(String text, SolidColorBrush color, bool timestamp)
+        public void appendTextToConsole(string text, SolidColorBrush color, bool timestamp)
         {
             TextRange range = new TextRange(
                     RTBConsole.Document.ContentEnd,
@@ -129,6 +149,20 @@ namespace Terminal
         {
             AddFrame addFrame = new AddFrame();
             addFrame.Show();
+        }
+
+        private void DeleteFrame_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem selectedItem = (ListBoxItem)FramesListBox.SelectedItem;
+
+            for (int i = 0; i < config.framesClipboard.Count; i++)
+                if (config.framesClipboard[i].name.Equals((string)selectedItem.Content))
+                    config.framesClipboard.RemoveAt(i);
+
+            FramesListBox.Items.Remove(selectedItem);
+            config.saveConfig();
+            config.readConfig();
+            config.refreshFrameList(this);
         }
     }
 
