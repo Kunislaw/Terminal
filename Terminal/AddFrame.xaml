@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Terminal"
         mc:Ignorable="d"
-        Title="Dodaj ramkę" Height="450" Width="800" WindowStartupLocation="CenterOwner">
-    <Grid>
-        
-    </Grid>
+        Title="Dodaj ramkę" Height="350" Width="600" WindowStartupLocation="CenterOwner">
+    <Border Padding="10">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Nazwa ramki:" Margin="0 0 5 5"/>
+                <TextBox x:Name="FrameNameTextBlock" Grid.Column="1" Padding="2" Margin="0 0 0 5"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Ramka:" Margin="0 0 0 5"/>
+                    <TextBox x:Name="FrameTextBlock" TextWrapping="Wrap" Padding="2" Margin="0 0 0 5" Height="220"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="AddFrameButton" Click="AddFrameButton_Click" Grid.Column="1" Content="Dodaj"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+    
 </Window>

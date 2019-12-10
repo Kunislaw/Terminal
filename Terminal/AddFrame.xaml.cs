@@ -19,10 +19,23 @@ namespace Terminal
     /// </summary>
     public partial class AddFrame : Window
     {
+        private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+
         public AddFrame()
         {
             InitializeComponent();
             Owner = Application.Current.MainWindow;
+        }
+
+        private void AddFrameButton_Click(object sender, RoutedEventArgs e)
+        {
+            string frameName = FrameNameTextBlock.Text;
+            string frame = FrameTextBlock.Text;
+            mainWindow.config.addFrame(frameName, frame);
+            mainWindow.config.saveConfig();
+            mainWindow.config.readConfig();
+            mainWindow.config.refreshFrameList(mainWindow);
+            this.Close();
         }
     }
 }
