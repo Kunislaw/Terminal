@@ -6,11 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using Newtonsoft.Json;
 
 namespace Terminal
 {
-
     public partial class MainWindow : Window
     {
         private SerialPortCommunication serialPortCommunication;
@@ -32,10 +30,10 @@ namespace Terminal
             serialPortCommunication = new SerialPortCommunication(this);
 
             config.readConfig();
-
+            
             // Ramki
             config.refreshFrameList(this);
-                
+
             // Ustawienia polaczenia
             COMComboBox.Text = config.lastCOM;
             BaudrateComboBox.Text = config.lastSpeed.ToString();
