@@ -5,7 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Terminal"
         mc:Ignorable="d"
-        Title="Terminal Sulecki i Weyna 1.0" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="Terminal Sulecki i Weyna 1.0" Height="700" Width="1050" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ContextMenu x:Key="framesClipboard">
+            <MenuItem Header="Nowa ramka" Click="MenuItem_Click_Add"/>
+            <MenuItem Header="Kopiuj do wysłania" Click="MenuItem_Click_Copy"/>
+            <MenuItem Header="Edytuj ramkę"/>
+            <MenuItem Header="Usuń ramkę" Click="MenuItem_Click_Delete"/>
+        </ContextMenu>
+    </Window.Resources>
     <Border Padding="10">
         <StackPanel>
 
@@ -111,23 +119,16 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Margin="0 5 5 5" Grid.Column="0">
-                    <ListBox x:Name="FramesListBox" Height="500"></ListBox>
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button x:Name="AddFrame" Click="AddFrame_Click" Grid.Column="0" Margin="0 5 5 0" Content="Dodaj" />
-                        <Button Grid.Column="1" Margin="0 5 5 0" Content="Kopiuj" />
-                        <Button x:Name="DeleteFrame" Click="DeleteFrame_Click" Grid.Column="2" Margin="0 5 0 0" Content="Usuń" />
-                    </Grid>
-
+                    <ListBox x:Name="FramesListBox" Height="500">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Nowa ramka" Click="MenuItem_Click_Add"/>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                    </ListBox>
                 </StackPanel>
 
-                <RichTextBox x:Name="RTBConsole" Grid.Column="1" Margin="0 5" IsEnabled="True" Focusable="True" TextChanged="RTBConsole_TextChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Height="525">
+                <RichTextBox x:Name="RTBConsole" Grid.Column="1" Margin="0 5" IsEnabled="False" Focusable="True" TextChanged="RTBConsole_TextChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0" />

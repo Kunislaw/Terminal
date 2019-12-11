@@ -60,9 +60,11 @@ namespace Terminal
         public void refreshFrameList(MainWindow mW)
         {
             mW.FramesListBox.Items.Clear();
+            ContextMenu cm = App.Current.MainWindow.FindResource("framesClipboard") as ContextMenu;
             for (int i = 0; i < framesClipboard.Count; i++)
             {
                 ListBoxItem listBoxItem = new ListBoxItem();
+                listBoxItem.ContextMenu = cm;
                 listBoxItem.Content = framesClipboard[i].name;
                 mW.FramesListBox.Items.Add(listBoxItem);
             }

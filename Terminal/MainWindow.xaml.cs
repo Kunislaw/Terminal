@@ -145,13 +145,13 @@ namespace Terminal
             RTBConsole.ScrollToEnd();
         }
 
-        private void AddFrame_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_Click_Add(object sender, RoutedEventArgs e)
         {
             AddFrame addFrame = new AddFrame();
             addFrame.Show();
         }
 
-        private void DeleteFrame_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_Click_Delete(object sender, RoutedEventArgs e)
         {
             ListBoxItem selectedItem = (ListBoxItem)FramesListBox.SelectedItem;
 
@@ -163,6 +163,14 @@ namespace Terminal
             config.saveConfig();
             config.readConfig();
             config.refreshFrameList(this);
+        }
+
+        private void MenuItem_Click_Copy(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem selectedItem = (ListBoxItem)FramesListBox.SelectedItem;
+            for (int i = 0; i < config.framesClipboard.Count; i++)
+                if (config.framesClipboard[i].name.Equals((string)selectedItem.Content))
+                    SendTextBox.Text = BitConverter.ToString(config.framesClipboard[i].frame);
         }
     }
 
