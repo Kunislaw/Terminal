@@ -94,6 +94,12 @@ namespace Terminal
                 OpenButton.IsEnabled = false;
                 CloseButton.IsEnabled = true;
                 SendTextBox.IsEnabled = true;
+                COMComboBox.IsEnabled = false;
+                BaudrateComboBox.IsEnabled = false;
+                BitsComboBox.IsEnabled = false;
+                ParityComboBox.IsEnabled = false;
+                StopBitsComboBox.IsEnabled = false;
+                HandshakeComboBox.IsEnabled = false;
                 config.setConfig(portName, baudRate, dataBits, parity, stopBits, handshake);
                 config.saveConfig();
             } else
@@ -111,6 +117,12 @@ namespace Terminal
                 OpenButton.IsEnabled = true;
                 CloseButton.IsEnabled = false;
                 SendTextBox.IsEnabled = false;
+                COMComboBox.IsEnabled = true;
+                BaudrateComboBox.IsEnabled = true;
+                BitsComboBox.IsEnabled = true;
+                ParityComboBox.IsEnabled = true;
+                StopBitsComboBox.IsEnabled = true;
+                HandshakeComboBox.IsEnabled = true;
             }
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
