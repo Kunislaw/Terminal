@@ -44,7 +44,15 @@ namespace Terminal
             FramesClipboard frameClipboard = new FramesClipboard(name, frame);
             framesClipboard.Add(frameClipboard);
         }
-
+        public bool frameNameExists(string name)
+        {
+            if(framesClipboard.FindIndex((item) => item.name.Equals(name)) < 0)
+            {
+                return false;
+            }
+            return true;
+            
+        }
         public void refreshFrameList(MainWindow mW)
         {
             mW.FramesListBox.Items.Clear();

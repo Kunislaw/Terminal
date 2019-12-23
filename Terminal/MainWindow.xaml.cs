@@ -189,8 +189,21 @@ namespace Terminal
         {
             ListBoxItem selectedItem = (ListBoxItem)FramesListBox.SelectedItem;
             for (int i = 0; i < config.framesClipboard.Count; i++)
+            {
                 if (config.framesClipboard[i].name.Equals((string)selectedItem.Content))
-                    SendTextBox.Text = BitConverter.ToString(config.framesClipboard[i].frame.frameStructure);
+                {
+                    if(RadioButton_ASCII.IsChecked == true)
+                    {
+                        SendTextBox.Text = BitConverter.ToString(config.framesClipboard[i].frame.frameStructure);
+
+                    }
+                    if (RadioButton_HEX.IsChecked == true)
+                    {
+                        SendTextBox.Text = BitConverter.ToString(config.framesClipboard[i].frame.frameStructure);
+                    }
+                }
+            }
+
         }
     }
 

@@ -20,30 +20,34 @@ namespace Terminal
         {
             string frameName = FrameNameTextBlock.Text;
             Frame frame = new Frame();
-            if(RadioButton_AddFrame_ASCII.IsChecked == true)
+            if(!mainWindow.config.frameNameExists(frameName))
             {
-                frame = new Frame(FrameTextBlock.Text, true);
+                if (RadioButton_AddFrame_ASCII.IsChecked == true)
+                {
+                    frame = new Frame(FrameTextBlock.Text, true);
 
-            }
-            if (RadioButton_AddFrame_HEX.IsChecked == true)
-            {
-                frame = new Frame(FrameTextBlock.Text, false);
+                }
+                if (RadioButton_AddFrame_HEX.IsChecked == true)
+                {
+                    frame = new Frame(FrameTextBlock.Text, false);
 
-            }
-            if(frame.frameStructure != null)
-            {
-                mainWindow.config.addFrame(frameName, frame);
-                mainWindow.config.saveConfig();
-                mainWindow.config.readConfig();
-                mainWindow.config.refreshFrameList(mainWindow);
-                this.Close();
+                }
+                if (frame.frameStructure != null)
+                {
+                    mainWindow.config.addFrame(frameName, frame);
+                    mainWindow.config.saveConfig();
+                    mainWindow.config.readConfig();
+                    mainWindow.config.refreshFrameList(mainWindow);
+                    this.Close();
+                }
+                else
+                {
+                    //Zle sparsowane, wyswietlic jakiegos messageBox'a
+                }
             } else
             {
-                //Zle sparsowane
+                //Ramka o podanej nazwie juz istnieje
             }
-
-
-
         }
     }
 }
