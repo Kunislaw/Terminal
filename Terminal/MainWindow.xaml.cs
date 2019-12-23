@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -126,37 +127,21 @@ namespace Terminal
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            List<byte> bufferToSend = new List<byte>();
-            if(RadioButton_ASCII.IsChecked == true)
+            byte[] bytesToSend = null;
+            if (RadioButton_ASCII.IsChecked == true)
             {
-                foreach (char c in SendTextBox.Text)
-                {
-                    bufferToSend.Add((byte)c);
-                }
-                serialPortCommunication.Send(bufferToSend.ToArray());
-                appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true);
+                bytesToSend = str2ByteArray(SendTextBox.Text, true);
 
             }
             if (RadioButton_HEX.IsChecked == true)
             {
-                string[] splittedHEXs = SendTextBox.Text.Split(' ');
-                bool allCorrectValues = true;
-           
-                foreach (string element in splittedHEXs)
-                {
-                    if (Regex.IsMatch(element, @"^0x[0-9A-F]{2}"))
-                    {
-                        bufferToSend.Add(Convert.ToByte(element.Substring(2), 16));
-                    } else
-                    {
-                        allCorrectValues = false;
-                    }
-                }
+                bytesToSend = str2ByteArray(SendTextBox.Text, false);
+            }
 
-                if (allCorrectValues)
-                {
-                    appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true);
-                }
+            if (bytesToSend != null)
+            {
+                serialPortCommunication.Send(bytesToSend);
+                appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true);
             }
         }
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -207,6 +192,34 @@ namespace Terminal
             for (int i = 0; i < config.framesClipboard.Count; i++)
                 if (config.framesClipboard[i].name.Equals((string)selectedItem.Content))
                     SendTextBox.Text = BitConverter.ToString(config.framesClipboard[i].frame);
+        }
+        private byte[] str2ByteArray(string stringToProcess,bool ASCII = true)
+        {
+            List<byte> byteArray = new List<byte>();
+            if (stringToProcess.Length < 1) return null;
+            if (ASCII)
+            {
+                    foreach (char c in stringToProcess)
+                    {
+                        byteArray.Add((byte)c);
+                    }
+            }
+            else
+            {
+                string[] splittedHEXs = stringToProcess.Split(' ');
+                foreach (string element in splittedHEXs)
+                {
+                    if (Regex.IsMatch(element, @"^0x[0-9A-F]{2}$"))
+                    {
+                        byteArray.Add(Convert.ToByte(element.Substring(2), 16));
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            return byteArray.ToArray();
         }
     }
 
