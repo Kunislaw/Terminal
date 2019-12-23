@@ -1,0 +1,48 @@
+﻿<Window x:Class="Terminal.EditFrame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Terminal"
+        mc:Ignorable="d"
+        Title="Edytuj ramkę" Height="365" Width="800" WindowStartupLocation="CenterOwner">
+    <Border Padding="10">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Nazwa ramki:" Margin="0 0 5 5"/>
+                <TextBox x:Name="FrameNameTextBlock" Grid.Column="1" Padding="2" Margin="0 0 0 5"/>
+                <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                    <RadioButton x:Name="RadioButton_EditFrame_ASCII" GroupName="EditFrame" IsChecked="True">ASCII</RadioButton>
+                    <RadioButton x:Name="RadioButton_EditFrame_HEX" GroupName="EditFrame">HEX</RadioButton>
+                </StackPanel>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Ramka:" Margin="0 0 0 5"/>
+                    <TextBox x:Name="FrameTextBlock" TextWrapping="Wrap" Padding="2" Margin="0 0 0 5" Height="220"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="EditFrameButton" Click="EditFrameButton_Click" Grid.Column="1" Content="Edytuj"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>
