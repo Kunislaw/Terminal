@@ -39,21 +39,9 @@ namespace Terminal
             handShaking = lHandShaking;
         }
 
-        public void addFrame(string name, string frame)
+        public void addFrame(string name, Frame frame)
         {
-            //FramesClipboard frameClipboard = new FramesClipboard();
-            //frameClipboard.name = name;
-
-            //byte[] frameBytes = Encoding.ASCII.GetBytes(frame);
-            //string frameHex = "0x" + BitConverter.ToString(frameBytes).Replace("-", " 0x");
-
-            //frameClipboard.frame = frameHex;
-            //framesClipboard.Add(frameClipboard);
-
-            FramesClipboard frameClipboard = new FramesClipboard();
-            frameClipboard.name = name;
-
-            frameClipboard.frame = Encoding.ASCII.GetBytes(frame);
+            FramesClipboard frameClipboard = new FramesClipboard(name, frame);
             framesClipboard.Add(frameClipboard);
         }
 

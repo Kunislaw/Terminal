@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+
 
 namespace Terminal
 {
@@ -30,12 +19,31 @@ namespace Terminal
         private void AddFrameButton_Click(object sender, RoutedEventArgs e)
         {
             string frameName = FrameNameTextBlock.Text;
-            string frame = FrameTextBlock.Text;
-            mainWindow.config.addFrame(frameName, frame);
-            mainWindow.config.saveConfig();
-            mainWindow.config.readConfig();
-            mainWindow.config.refreshFrameList(mainWindow);
-            this.Close();
+            Frame frame = new Frame();
+            if(RadioButton_AddFrame_ASCII.IsChecked == true)
+            {
+                frame = new Frame(FrameTextBlock.Text, true);
+
+            }
+            if (RadioButton_AddFrame_HEX.IsChecked == true)
+            {
+                frame = new Frame(FrameTextBlock.Text, false);
+
+            }
+            if(frame.frameStructure != null)
+            {
+                mainWindow.config.addFrame(frameName, frame);
+                mainWindow.config.saveConfig();
+                mainWindow.config.readConfig();
+                mainWindow.config.refreshFrameList(mainWindow);
+                this.Close();
+            } else
+            {
+                //Zle sparsowane
+            }
+
+
+
         }
     }
 }

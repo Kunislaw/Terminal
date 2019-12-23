@@ -10,12 +10,17 @@
         <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Text="Nazwa ramki:" Margin="0 0 5 5"/>
                 <TextBox x:Name="FrameNameTextBlock" Grid.Column="1" Padding="2" Margin="0 0 0 5"/>
+                <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                    <RadioButton x:Name="RadioButton_AddFrame_ASCII" GroupName="AddFrame" IsChecked="True">ASCII</RadioButton>
+                    <RadioButton x:Name="RadioButton_AddFrame_HEX" GroupName="AddFrame">HEX</RadioButton>
+                </StackPanel>
             </Grid>
 
             <Grid>

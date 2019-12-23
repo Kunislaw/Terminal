@@ -127,20 +127,19 @@ namespace Terminal
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            byte[] bytesToSend = null;
+            Frame frame = new Frame();
             if (RadioButton_ASCII.IsChecked == true)
             {
-                bytesToSend = str2ByteArray(SendTextBox.Text, true);
-
+                frame = new Frame(SendTextBox.Text, true);
             }
             if (RadioButton_HEX.IsChecked == true)
             {
-                bytesToSend = str2ByteArray(SendTextBox.Text, false);
+                frame = new Frame(SendTextBox.Text, false);
             }
 
-            if (bytesToSend != null)
+            if (frame.frameStructure != null)
             {
-                serialPortCommunication.Send(bytesToSend);
+                serialPortCommunication.Send(frame.frameStructure);
                 appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true);
             }
         }
@@ -191,35 +190,7 @@ namespace Terminal
             ListBoxItem selectedItem = (ListBoxItem)FramesListBox.SelectedItem;
             for (int i = 0; i < config.framesClipboard.Count; i++)
                 if (config.framesClipboard[i].name.Equals((string)selectedItem.Content))
-                    SendTextBox.Text = BitConverter.ToString(config.framesClipboard[i].frame);
-        }
-        private byte[] str2ByteArray(string stringToProcess,bool ASCII = true)
-        {
-            List<byte> byteArray = new List<byte>();
-            if (stringToProcess.Length < 1) return null;
-            if (ASCII)
-            {
-                    foreach (char c in stringToProcess)
-                    {
-                        byteArray.Add((byte)c);
-                    }
-            }
-            else
-            {
-                string[] splittedHEXs = stringToProcess.Split(' ');
-                foreach (string element in splittedHEXs)
-                {
-                    if (Regex.IsMatch(element, @"^0x[0-9A-F]{2}$"))
-                    {
-                        byteArray.Add(Convert.ToByte(element.Substring(2), 16));
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-            }
-            return byteArray.ToArray();
+                    SendTextBox.Text = BitConverter.ToString(config.framesClipboard[i].frame.frameStructure);
         }
     }
 
