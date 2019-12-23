@@ -171,6 +171,12 @@ namespace Terminal
             addFrame.Show();
         }
 
+        private void MenuItem_Click_Edit(object sender, RoutedEventArgs e)
+        {
+            EditFrame editFrame = new EditFrame();
+            editFrame.Show();
+        }
+
         private void MenuItem_Click_Delete(object sender, RoutedEventArgs e)
         {
             ListBoxItem selectedItem = (ListBoxItem)FramesListBox.SelectedItem;

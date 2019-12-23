@@ -10,7 +10,7 @@
         <ContextMenu x:Key="framesClipboard">
             <MenuItem Header="Nowa ramka" Click="MenuItem_Click_Add"/>
             <MenuItem Header="Kopiuj do wysłania" Click="MenuItem_Click_Copy"/>
-            <MenuItem Header="Edytuj ramkę"/>
+            <MenuItem Header="Edytuj ramkę" Click="MenuItem_Click_Edit"/>
             <MenuItem Header="Usuń ramkę" Click="MenuItem_Click_Delete"/>
         </ContextMenu>
     </Window.Resources>

@@ -10,24 +10,27 @@ namespace Terminal
     public class Frame
     {
         public byte[] frameStructure {get; set;}
-        public Frame()
-        {
+        public string format { get; set; }
 
-        }
+        public Frame() {}
+
         public Frame(byte[] frameBytes)
         {
             frameStructure = frameBytes;       
         }
+
         public Frame(string stringToProcess, bool ASCII = true)
         {
             frameStructure = str2ByteArray(stringToProcess, ASCII);
         }
+
         private byte[] str2ByteArray(string stringToProcess, bool ASCII = true)
         {
             List<byte> byteArray = new List<byte>();
             if (stringToProcess.Length < 1) return null;
             if (ASCII)
             {
+                format = "ASCII";
                 foreach (char c in stringToProcess)
                 {
                     byteArray.Add((byte)c);
@@ -35,6 +38,7 @@ namespace Terminal
             }
             else
             {
+                format = "HEX";
                 string[] splittedHEXs = stringToProcess.Split(' ');
                 foreach (string element in splittedHEXs)
                 {

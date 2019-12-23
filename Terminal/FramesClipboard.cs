@@ -5,7 +5,7 @@ namespace Terminal
     public class FramesClipboard
     {
         public string creationTimestamp;
-        public string lastModification = null;
+        public string lastModification { get; set; }
         public string name { get; set; }
         public Frame frame { get; set; }
 
@@ -19,6 +19,5 @@ namespace Terminal
             name = frameName;
             frame = newFrame;
         }
-
     }
 }
