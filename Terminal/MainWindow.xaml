@@ -111,7 +111,28 @@
                     <Button x:Name="ClearButton" Click="ClearButton_Click" Content="Czyść" />
                 </StackPanel>
             </Grid>
-
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="4*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button x:Name="StartLogButton" Click="StartLogButton_Click" Content="Rozpocznij logowanie" IsEnabled="False"/>
+                    
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button x:Name="StopLogButton" Click="StopLogButton_Click" Content="Zatrzymaj logowanie" IsEnabled="False"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button x:Name="SetReceivePatternButton" Click="SetReceivePatternButton_Click" Content="Ustaw wzor odbierania" IsEnabled="False"/>
+                </StackPanel>
+                <StackPanel Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button x:Name="SetTransmitPatternButton" Click="SetTransmitPatternButton_Click" Content="Ustaw wzor odbierania" IsEnabled="False"/>
+                </StackPanel>
+            </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -128,7 +149,7 @@
                     </ListBox>
                 </StackPanel>
 
-                <RichTextBox x:Name="RTBConsole" Grid.Column="1" Margin="0 5" IsEnabled="False" Focusable="True" TextChanged="RTBConsole_TextChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                <RichTextBox x:Name="RTBConsole" Grid.Column="1" Margin="0 5" IsEnabled="True" Focusable="True" TextChanged="RTBConsole_TextChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Height="500">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0" />
