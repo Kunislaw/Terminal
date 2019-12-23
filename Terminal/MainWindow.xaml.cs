@@ -188,22 +188,21 @@ namespace Terminal
         private void MenuItem_Click_Copy(object sender, RoutedEventArgs e)
         {
             ListBoxItem selectedItem = (ListBoxItem)FramesListBox.SelectedItem;
-            for (int i = 0; i < config.framesClipboard.Count; i++)
+            FramesClipboard searchedFromFrameClipboard = config.framesClipboard.Find((item) => item.name.Equals(selectedItem.Content));
+            if(RadioButton_ASCII.IsChecked == true)
             {
-                if (config.framesClipboard[i].name.Equals((string)selectedItem.Content))
-                {
-                    if(RadioButton_ASCII.IsChecked == true)
-                    {
-                        SendTextBox.Text = BitConverter.ToString(config.framesClipboard[i].frame.frameStructure);
-
-                    }
-                    if (RadioButton_HEX.IsChecked == true)
-                    {
-                        SendTextBox.Text = BitConverter.ToString(config.framesClipboard[i].frame.frameStructure);
-                    }
-                }
+                SendTextBox.Text = Encoding.Default.GetString(searchedFromFrameClipboard.frame.frameStructure);
             }
-
+            if (RadioButton_HEX.IsChecked == true)
+            {
+                string formattedString = "";
+                foreach(byte oneByte in searchedFromFrameClipboard.frame.frameStructure)
+                {
+                    formattedString += "0x" + oneByte.ToString("X") + " ";
+                }
+                formattedString = formattedString.Remove(formattedString.Length - 1);
+                SendTextBox.Text = formattedString;
+            }
         }
     }
 
