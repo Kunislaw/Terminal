@@ -142,12 +142,18 @@
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="8*" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <TextBox x:Name="SendTextBox" Padding="2" Margin="0 0 5 0" IsEnabled="False" Grid.Column="0"/>
                 <Button x:Name="SendButton" Click="SendButton_Click" Grid.Column="1" Content="Wyślij" IsEnabled="False"/>
+                <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                    <RadioButton x:Name="RadioButton_ASCII" GroupName="SendOption" IsChecked="True">ASCII</RadioButton>
+                    <RadioButton x:Name="RadioButton_HEX" GroupName="SendOption">HEX</RadioButton>
+                </StackPanel>
+                
             </Grid>
             
         </StackPanel>

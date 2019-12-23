@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -126,12 +127,37 @@ namespace Terminal
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             List<byte> bufferToSend = new List<byte>();
-            foreach(char c in SendTextBox.Text)
+            if(RadioButton_ASCII.IsChecked == true)
             {
-                bufferToSend.Add((byte)c);
+                foreach (char c in SendTextBox.Text)
+                {
+                    bufferToSend.Add((byte)c);
+                }
+                serialPortCommunication.Send(bufferToSend.ToArray());
+                appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true);
+
             }
-            serialPortCommunication.Send(bufferToSend.ToArray());
-            appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true);
+            if (RadioButton_HEX.IsChecked == true)
+            {
+                string[] splittedHEXs = SendTextBox.Text.Split(' ');
+                bool allCorrectValues = true;
+           
+                foreach (string element in splittedHEXs)
+                {
+                    if (Regex.IsMatch(element, @"^0x[0-9A-F]{2}"))
+                    {
+                        bufferToSend.Add(Convert.ToByte(element.Substring(2), 16));
+                    } else
+                    {
+                        allCorrectValues = false;
+                    }
+                }
+
+                if (allCorrectValues)
+                {
+                    appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true);
+                }
+            }
         }
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
