@@ -62,11 +62,18 @@
       <DependentUpon>AddFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Config.cs" />
+    <Compile Include="EditFrame.xaml.cs">
+      <DependentUpon>EditFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Frame.cs" />
     <Compile Include="FramesClipboard.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="SerialPortCommunication.cs" />
     <Page Include="AddFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
