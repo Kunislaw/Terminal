@@ -20,6 +20,8 @@ namespace Terminal
         public ObservableCollection<ComboBoxItem> CbItems { get; set; }
         public ComboBoxItem SelectedCbItem { get; set; }
         public string currentLoggingFile = null;
+        public string patternReceive = null;
+        public string patternTransmsit = null;
 
         public MainWindow()
         {
