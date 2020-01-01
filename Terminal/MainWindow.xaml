@@ -120,17 +120,17 @@
                     <ColumnDefinition Width="4*" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button x:Name="StartLogButton" Click="StartLogButton_Click" Content="Rozpocznij logowanie" IsEnabled="False"/>
+                    <Button x:Name="StartLogButton" Click="StartLogButton_Click" Content="Rozpocznij logowanie" IsEnabled="True"/>
                     
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button x:Name="StopLogButton" Click="StopLogButton_Click" Content="Zatrzymaj logowanie" IsEnabled="False"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button x:Name="SetReceivePatternButton" Click="SetReceivePatternButton_Click" Content="Ustaw wzor odbierania" IsEnabled="False"/>
+                    <Button x:Name="SetReceivePatternButton" Click="SetReceivePatternButton_Click" Content="Ustaw wzor odbierania" IsEnabled="True"/>
                 </StackPanel>
                 <StackPanel Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button x:Name="SetTransmitPatternButton" Click="SetTransmitPatternButton_Click" Content="Ustaw wzor odbierania" IsEnabled="False"/>
+                    <Button x:Name="SetTransmitPatternButton" Click="SetTransmitPatternButton_Click" Content="Ustaw wzor nadawania" IsEnabled="True"/>
                 </StackPanel>
             </Grid>
             <Grid>

@@ -33,8 +33,10 @@ namespace Terminal
                 RadioButton_EditFrame_ASCII.IsChecked = true;
                 RadioButton_EditFrame_HEX.IsChecked = false;
                 string frameContent = "";
-                for (int i = 0; i < selectedFrame.frame.frameStructure.Length; i++)
-                    frameContent += (char)selectedFrame.frame.frameStructure[i];
+                foreach (char c in selectedFrame.frame.frameStructure)
+                {
+                    frameContent += c;
+                }
                 FrameTextBlock.Text = frameContent;
             }
         }

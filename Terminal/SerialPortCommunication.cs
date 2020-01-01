@@ -84,11 +84,11 @@ namespace Terminal
 
             if(Math.Abs(messageMilis[0] - messageMilis[1]) > 3)
             {
-                mainWindow.Dispatcher.Invoke(() => mainWindow.appendTextToConsole(ReceivedString + "\n", Brushes.Red, true));
+                mainWindow.Dispatcher.Invoke(() => mainWindow.appendTextToConsole(ReceivedString + "\n", Brushes.Red, true, false));
 
             } else
             {
-                mainWindow.Dispatcher.Invoke(() => mainWindow.appendTextToConsole(ReceivedString, Brushes.Red, true));
+                mainWindow.Dispatcher.Invoke(() => mainWindow.appendTextToConsole(ReceivedString, Brushes.Red, true, false));
 
             }
 

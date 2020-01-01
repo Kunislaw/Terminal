@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.IO.Ports;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,7 +19,8 @@ namespace Terminal
         public Config config { get; set; }= new Config();
         public ObservableCollection<ComboBoxItem> CbItems { get; set; }
         public ComboBoxItem SelectedCbItem { get; set; }
-        
+        public string currentLoggingFile = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -140,14 +143,14 @@ namespace Terminal
             if (frame.frameStructure != null)
             {
                 serialPortCommunication.Send(frame.frameStructure);
-                appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true);
+                appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true, true);
             }
         }
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             RTBConsole.Document.Blocks.Clear();
         }
-        public void appendTextToConsole(string text, SolidColorBrush color, bool timestamp)
+        public void appendTextToConsole(string text, SolidColorBrush color, bool timestamp, bool sending)
         {
             TextRange range = new TextRange(
                     RTBConsole.Document.ContentEnd,
@@ -158,6 +161,18 @@ namespace Terminal
             }
             range.Text += text;
             range.ApplyPropertyValue(TextElement.ForegroundProperty, color);
+            if (StartLogButton.IsEnabled == false && currentLoggingFile != null)
+            {
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), currentLoggingFile), true))
+                {
+                    string preparedString = "";
+                    if (timestamp) preparedString += "[" + DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "]: ";
+                    if (sending) preparedString += "(T) ";
+                    else preparedString += "(R) ";
+                    preparedString += text;
+                    outputFile.WriteAsync(preparedString);
+                }
+            }
         }
 
         private void RTBConsole_TextChanged(object sender, TextChangedEventArgs e)
@@ -212,12 +227,23 @@ namespace Terminal
         }
         private void StartLogButton_Click(object sender, RoutedEventArgs e)
         {
-            //Po kliknieciu ma powstac nowy plik logow w moich dokumentach
-            //  z taka nazwa DD_MM_YYYY_HH_MM_SS.log
+            if(StartLogButton.IsEnabled == true)
+            {
+                currentLoggingFile = DateTime.Now.ToString("HH_mm_ss_dd_MM_yyyy") + ".txt";
+                StartLogButton.IsEnabled = false;
+                StopLogButton.IsEnabled = true;
+            }
         }
         private void StopLogButton_Click(object sender, RoutedEventArgs e)
         {
-            //tutaj konczymy logowanie
+            if(StopLogButton.IsEnabled == true)
+            {
+                string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                Process.Start("explorer.exe", "/select," + Path.Combine(docPath,currentLoggingFile));
+                currentLoggingFile = null;
+                StartLogButton.IsEnabled = true;
+                StopLogButton.IsEnabled = false;
+            }
         }
         private void SetReceivePatternButton_Click(object sender, RoutedEventArgs e)
         {
