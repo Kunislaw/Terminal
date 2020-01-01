@@ -178,6 +178,10 @@ namespace Terminal
         private void RTBConsole_TextChanged(object sender, TextChangedEventArgs e)
         {
             RTBConsole.ScrollToEnd();
+            if (RTBConsole.Document.Blocks.Count > 1000)
+            {
+                RTBConsole.Document.Blocks.Clear();
+            }
         }
 
         private void MenuItem_Click_Add(object sender, RoutedEventArgs e)
