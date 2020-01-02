@@ -113,25 +113,16 @@
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button x:Name="StartLogButton" Click="StartLogButton_Click" Content="Rozpocznij logowanie" IsEnabled="True"/>
-                    
-                </StackPanel>
-                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button x:Name="StopLogButton" Click="StopLogButton_Click" Content="Zatrzymaj logowanie" IsEnabled="False"/>
-                </StackPanel>
-                <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button x:Name="SetReceivePatternButton" Click="SetReceivePatternButton_Click" Content="Ustaw wzor odbierania" IsEnabled="True"/>
-                </StackPanel>
-                <StackPanel Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button x:Name="SetTransmitPatternButton" Click="SetTransmitPatternButton_Click" Content="Ustaw wzor nadawania" IsEnabled="True"/>
-                </StackPanel>
+                
+                <Button Grid.Column="0" Margin="0 5 5 0" x:Name="StartLogButton" Click="StartLogButton_Click" Content="Rozpocznij logowanie" IsEnabled="True"/>
+                <Button Grid.Column="1" Margin="0 5 5 0" x:Name="StopLogButton" Click="StopLogButton_Click" Content="Zatrzymaj logowanie" IsEnabled="False"/>
+                <Button Grid.Column="2" Margin="0 5 5 0" x:Name="SetReceivePatternButton" Click="SetReceivePatternButton_Click" Content="Ustaw wzor odbierania" IsEnabled="True"/>
+                <Button Grid.Column="3" Margin="0 5 0 0" x:Name="SetTransmitPatternButton" Click="SetTransmitPatternButton_Click" Content="Ustaw wzor nadawania" IsEnabled="True"/>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
