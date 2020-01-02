@@ -255,7 +255,8 @@ namespace Terminal
         {
             //tutaj ustawiamy o jakim wzorze maja byc wyswietlane bajty przychodze, jezeli * to wszystko ma byc wyswietlane
             //potrebne nowe okno do otwierania takie jak przy definicji ramki
-            
+            SetReceivePattern setTransmitPattern = new SetReceivePattern();
+            setTransmitPattern.Show();
         }
         private void SetTransmitPatternButton_Click(object sender, RoutedEventArgs e)
         {

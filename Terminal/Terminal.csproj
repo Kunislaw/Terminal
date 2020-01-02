@@ -67,6 +67,9 @@
     </Compile>
     <Compile Include="Frame.cs" />
     <Compile Include="FramesClipboard.cs" />
+    <Compile Include="SetReceivePattern.xaml.cs">
+      <DependentUpon>SetReceivePattern.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SetTransmitPattern.xaml.cs">
       <DependentUpon>SetTransmitPattern.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SetReceivePattern.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SetTransmitPattern.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
