@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,10 +20,27 @@ namespace Terminal
     /// </summary>
     public partial class SetReceivePattern : Window
     {
+        private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+
         public SetReceivePattern()
         {
             InitializeComponent();
             Owner = Application.Current.MainWindow;
+            ReceivePatternTextBox.Text = mainWindow.patternReceive;
         }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ReceivePatternTextBox.Text.Length > 0)
+            {
+                mainWindow.patternReceive = ReceivePatternTextBox.Text;
+                Close();
+            } else
+            {
+                //Bledny format wyswietlic massageBoxa
+            }
+
+        }
+
     }
 }

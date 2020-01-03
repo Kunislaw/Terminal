@@ -6,7 +6,38 @@
         xmlns:local="clr-namespace:Terminal"
         mc:Ignorable="d"
         Title="SetReceivePattern" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid>
-        
-    </Grid>
+    <Border Padding="10">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Wzor odbierania:" Margin="0 0 0 5"/>
+                    <TextBox x:Name="ReceivePatternTextBox" TextWrapping="Wrap" Padding="2" Margin="0 0 0 5" Height="220"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="SaveButton" Click="SaveButton_Click" Grid.Column="1" Content="Zapisz"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+
 </Window>

@@ -20,7 +20,7 @@ namespace Terminal
         public ObservableCollection<ComboBoxItem> CbItems { get; set; }
         public ComboBoxItem SelectedCbItem { get; set; }
         public string currentLoggingFile = null;
-        public string patternReceive = null;
+        public string patternReceive = "*";
         public string patternTransmsit = null;
 
         public MainWindow()
@@ -157,12 +157,21 @@ namespace Terminal
             TextRange range = new TextRange(
                     RTBConsole.Document.ContentEnd,
                     RTBConsole.Document.ContentEnd);
-            if (timestamp)
+            if(patternReceive == "*")
             {
                 range.Text = "[" + DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "]: ";
+                range.Text += text;
+                range.ApplyPropertyValue(TextElement.ForegroundProperty, color);
+            } else
+            {
+                string regexPattern = @"^" + patternReceive;
+                if(Regex.IsMatch(text, regexPattern)){
+                    range.Text = "[" + DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "]: ";
+                    range.Text += text;
+                    range.ApplyPropertyValue(TextElement.ForegroundProperty, color);
+                }
             }
-            range.Text += text;
-            range.ApplyPropertyValue(TextElement.ForegroundProperty, color);
+            
             if (StartLogButton.IsEnabled == false && currentLoggingFile != null)
             {
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), currentLoggingFile), true))
@@ -253,8 +262,6 @@ namespace Terminal
         }
         private void SetReceivePatternButton_Click(object sender, RoutedEventArgs e)
         {
-            //tutaj ustawiamy o jakim wzorze maja byc wyswietlane bajty przychodze, jezeli * to wszystko ma byc wyswietlane
-            //potrebne nowe okno do otwierania takie jak przy definicji ramki
             SetReceivePattern setTransmitPattern = new SetReceivePattern();
             setTransmitPattern.Show();
         }
