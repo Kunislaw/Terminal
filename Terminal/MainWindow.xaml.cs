@@ -21,7 +21,7 @@ namespace Terminal
         public ComboBoxItem SelectedCbItem { get; set; }
         public string currentLoggingFile = null;
         public string patternReceive = "*";
-        public string patternTransmsit = "[data] 0x31";
+        public string patternTransmsit = "[data]";
 
         public MainWindow()
         {
