@@ -38,7 +38,7 @@ namespace Terminal
                     {
                         byteArray.AddRange(bytesFromTextBox);
                     }
-                    else
+                    if (Regex.IsMatch(splittedValue.Substring(2), @"^[A-F0-9]{2}$"))
                     {
                         byteArray.Add(Convert.ToByte(splittedValue.Substring(2), 16));
                     }

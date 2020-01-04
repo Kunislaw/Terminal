@@ -33,7 +33,7 @@ namespace Terminal
             bool allValuesCorrect = true;
             foreach(string splittedValue in splittedValues)
             {
-                if(!Regex.IsMatch(splittedValue, @"(\[data\]|\[crc8\]|\[crc16\]|\[crc32\]|\[bcc\]|\[parity\]|0x[A-F0-9]{2})"))
+                if(!Regex.IsMatch(splittedValue, @"^(\[data\]|\[crc8\]|\[crc16\]|\[crc32\]|\[bcc\]|\[parity\]|0x[A-F0-9]{2})$"))
                 {
                     allValuesCorrect = false;
                 }
