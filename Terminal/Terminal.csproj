@@ -61,6 +61,7 @@
     <Compile Include="AddFrame.xaml.cs">
       <DependentUpon>AddFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Checksums.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="EditFrame.xaml.cs">
       <DependentUpon>EditFrame.xaml</DependentUpon>

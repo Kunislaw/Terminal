@@ -21,7 +21,7 @@ namespace Terminal
         public ComboBoxItem SelectedCbItem { get; set; }
         public string currentLoggingFile = null;
         public string patternReceive = "*";
-        public string patternTransmsit = null;
+        public string patternTransmsit = "[data] 0x31";
 
         public MainWindow()
         {
@@ -135,17 +135,17 @@ namespace Terminal
             Frame frame = new Frame();
             if (RadioButton_ASCII.IsChecked == true)
             {
-                frame = new Frame(SendTextBox.Text, true);
+                frame = new Frame(SendTextBox.Text, patternTransmsit, true);
             }
             if (RadioButton_HEX.IsChecked == true)
             {
-                frame = new Frame(SendTextBox.Text, false);
+                frame = new Frame(SendTextBox.Text, patternTransmsit, false);
             }
 
             if (frame.frameStructure != null)
             {
                 serialPortCommunication.Send(frame.frameStructure);
-                appendTextToConsole(SendTextBox.Text + "\n", Brushes.Blue, true, true);
+                appendTextToConsole(Encoding.ASCII.GetString(frame.frameStructure) + "\n", Brushes.Blue, true, true);
             }
         }
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -162,7 +162,8 @@ namespace Terminal
                 range.Text = "[" + DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "]: ";
                 range.Text += text;
                 range.ApplyPropertyValue(TextElement.ForegroundProperty, color);
-            } else
+            }
+            else
             {
                 string regexPattern = @"^" + patternReceive;
                 if(Regex.IsMatch(text, regexPattern)){
