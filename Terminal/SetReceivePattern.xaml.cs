@@ -37,7 +37,7 @@ namespace Terminal
                 Close();
             } else
             {
-                //Bledny format wyswietlic massageBoxa
+                MessageBox.Show("Podano błędny wzór wiadomości odbierania\nNależy używać tylko liter i cyfr\nPrzykładowy poprawny wzór: abc1", "Terminal", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }

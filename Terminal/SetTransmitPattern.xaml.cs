@@ -43,6 +43,10 @@ namespace Terminal
                 mainWindow.patternTransmsit = TransmitPatternTextBox.Text;
                 Close();
             }
+            else
+            {
+                MessageBox.Show("Podano błędny wzór nadawania\nNależy używać tylko znaków HEX'a oraz specjalnych znaczników\nPrzykładowy poprawny wzór: 0xFF [data] 0xFF", "Terminal", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

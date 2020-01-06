@@ -2,6 +2,7 @@
 using System.IO.Ports;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Terminal
@@ -45,7 +46,7 @@ namespace Terminal
             try {
                 serialPort.Open();
             } catch(Exception e) {
-                Console.WriteLine(e);
+                MessageBox.Show("Nie udało się otworzyć portu\nPowód: " + e.Message, "Terminal", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -60,7 +61,7 @@ namespace Terminal
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                MessageBox.Show("Nie udało się zamknąć portu\nPowód: " + e.Message, "Terminal", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
