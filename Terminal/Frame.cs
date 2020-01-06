@@ -27,6 +27,7 @@ namespace Terminal
         public Frame(string stringToProcess, string pattern, bool ASCII = true)
         {
             List<byte> bytesFromTextBox = str2ByteArray(stringToProcess, ASCII);
+            Checksums checksums = new Checksums();
             frameStructure = null;
             if(bytesFromTextBox != null)
             {
@@ -37,6 +38,32 @@ namespace Terminal
                     if (splittedValue == "[data]")
                     {
                         byteArray.AddRange(bytesFromTextBox);
+                    }
+                    if(splittedValue == "[crc8]")
+                    {
+                        byte crc8 = checksums.CRC8(byteArray.ToArray());
+                        byteArray.Add(crc8);
+                    }
+                    if (splittedValue == "[crc16]")
+                    {
+                        byte[] crc16 = checksums.CRC16(byteArray.ToArray());
+                        byteArray.AddRange(crc16);
+
+                    }
+                    if (splittedValue == "[crc32]")
+                    {
+                        byte[] crc32 = checksums.CRC32(byteArray.ToArray());
+                        byteArray.AddRange(crc32);
+                    }
+                    if (splittedValue == "[bcc]")
+                    {
+                        byte bcc = checksums.BCC(byteArray.ToArray());
+                        byteArray.Add(bcc);
+                    }
+                    if (splittedValue == "[parity]")
+                    {
+                        byte parity = checksums.parity(byteArray.ToArray());
+                        byteArray.Add(parity);
                     }
                     if (Regex.IsMatch(splittedValue.Substring(2), @"^[A-F0-9]{2}$"))
                     {

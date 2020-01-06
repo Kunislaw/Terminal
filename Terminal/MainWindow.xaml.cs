@@ -268,8 +268,6 @@ namespace Terminal
         }
         private void SetTransmitPatternButton_Click(object sender, RoutedEventArgs e)
         {
-            //tutaj ustawiamy strukture ramki do wysylania np. 0xFF [data] [crc8] 0xFF
-            //potrzebne nowe okno do otwierania takie jak przy definicji ramki
             SetTransmitPattern setTransmitPattern = new SetTransmitPattern();
             setTransmitPattern.Show();
         }
