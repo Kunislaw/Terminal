@@ -52,7 +52,7 @@ namespace Terminal
                     }
                     if (splittedValue == "[crc32]")
                     {
-                        byte[] crc32 = checksums.CRC32(byteArray.ToArray());
+                        byte[] crc32 = BitConverter.GetBytes(checksums.CRC32(byteArray.ToArray()));
                         byteArray.AddRange(crc32);
                     }
                     if (splittedValue == "[bcc]")
