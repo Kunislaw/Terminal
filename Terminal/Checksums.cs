@@ -8,6 +8,23 @@ namespace Terminal
 {
     class Checksums
     {
+        private readonly UInt32[] m_checksumTable;
+        private const UInt32 s_generator = 0xEDB88320;
+
+        public Checksums()
+        {
+            m_checksumTable = Enumerable.Range(0, 256).Select(i =>
+            {
+                var tableEntry = (uint)i;
+                for (var j = 0; j < 8; ++j)
+                {
+                    tableEntry = ((tableEntry & 1) != 0)
+                        ? (s_generator ^ (tableEntry >> 1))
+                        : (tableEntry >> 1);
+                }
+                return tableEntry;
+            }).ToArray();
+        }
         static byte[] CRC8Table =
         {
             0, 94, 188, 226, 97, 63, 221, 131, 194, 156, 126,
