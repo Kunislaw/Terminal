@@ -89,11 +89,27 @@ namespace Terminal
             byte crcSecondByte = (byte)((crc >> 8) & 0xFF);
             return new byte[] { crcFirstByte, crcSecondByte};
         }
-        public byte[] CRC32(byte[] data)
+        public UInt32 CRC32<T>(IEnumerable<T> byteStream)
         {
-            byte[] a = { 1, 2, 3 };
-            return a;
-            //Dokonczyc
+            try
+            {
+                // Initialize checksumRegister to 0xFFFFFFFF and calculate the checksum.
+                return ~byteStream.Aggregate(0xFFFFFFFF, (checksumRegister, currentByte) =>
+                          (m_checksumTable[(checksumRegister & 0xFF) ^ Convert.ToByte(currentByte)] ^ (checksumRegister >> 8)));
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e);
+            }
+            catch (InvalidCastException e)
+            {
+                Console.WriteLine(e);
+            }
+            catch (OverflowException e)
+            {
+                Console.WriteLine(e);
+            }
+            return 1;
         }
         public byte BCC(byte[] data)
         {
