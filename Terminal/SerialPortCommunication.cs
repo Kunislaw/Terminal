@@ -9,7 +9,7 @@ namespace Terminal
 {
     class SerialPortCommunication
     {
-        private SerialPort serialPort = new SerialPort();
+        private SerialPort serialPort;
         private string ReceivedString { get; set; }
         private Time time = new Time();
         private MainWindow mainWindow;
@@ -28,6 +28,7 @@ namespace Terminal
         {
             try
             {
+                serialPort = new SerialPort();
                 serialPort.PortName = portName;
                 serialPort.BaudRate = baudRate;
                 serialPort.DataBits = dataBits;
